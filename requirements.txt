@@ -1,0 +1,12 @@
+langchain
+django 
+djangorestframework
+djangorestframework-simplejwt
+langchain_openai
+pandas
+langchain-community
+langchain_chroma
+langchain_huggingface
+langchain_experimental
+pypdf
+tabulate
