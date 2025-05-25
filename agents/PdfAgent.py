@@ -11,7 +11,7 @@ from langchain.chains import RetrievalQAWithSourcesChain
 import openai
 
 from langchain_community.llms import HuggingFaceHub
-from langchain_huggingface import HuggingFaceEmbeddings
+#from langchain_huggingface import HuggingFaceEmbeddings
 vector_store_not_created_created= False
 
 #0 create dictionary of meta data 
@@ -83,7 +83,8 @@ def split_docs(docs, chunk_size=1000, chunk_overlap=200):
 # 3. Create vectorstore
 def create_vectorstore(documents):
     
-    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    #embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embedding_model = None
     embedding_model_name="sentence-transformers/all-MiniLM-L6-v2"
     vector_dir = "D:\\ai-ml-data\\chroma_store1"
     print("here...1 vector_dir: ", vector_dir)
