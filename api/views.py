@@ -15,22 +15,18 @@ from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts import PromptTemplate
 import pandas as pd
 
-global dataLoaded 
-dataLoaded = False
 
 
 def processQuestion(question):
     csv_folder_path = "D:\\ai-ml-data\\csv-input"
-    if( not dataLoaded):
        
-        f = open('..\\api_key.txt')
-        api_key = f.read()
-        os.environ['OPENAI_API_KEY'] = api_key
+    f = open('..\\api_key.txt')
+    api_key = f.read()
+    os.environ['OPENAI_API_KEY'] = api_key
 
-        llm = OpenAI()
-        contract_retriever = create_contract_retriever()
-        csv_agent = create_csv_retriever_agent(csv_folder_path)
-        dataLoaded = True
+    llm = OpenAI()
+    contract_retriever = create_contract_retriever()
+    csv_agent = create_csv_retriever_agent(csv_folder_path)
 
     intent_prompt = PromptTemplate.from_template(
         "Classify this question into one of the following categories: Contract, Events, Quotation, Supplier, HR.\n\nQuestion: {question}\nCategory:"

@@ -3,8 +3,6 @@ import os
 from langchain_community.document_loaders import CSVLoader
 from langchain.chains import RetrievalQAWithSourcesChain
 
-
-from langchain_huggingface import HuggingFaceEmbeddings
 import pandas as pd
 
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
