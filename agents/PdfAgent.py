@@ -86,7 +86,7 @@ def create_vectorstore(documents):
     #embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     embedding_model = None
     embedding_model_name="sentence-transformers/all-MiniLM-L6-v2"
-    vector_dir = "D:\\ai-ml-data\\chroma_store1"
+    vector_dir = "chroma_store"
     print("here...1 vector_dir: ", vector_dir)
     # Load existing vector store
     vectorstore = Chroma(
@@ -101,14 +101,17 @@ def create_vectorstore(documents):
 
     
     if (count == 0):
-        vectorstore = Chroma.from_documents(documents, embedding_model, persist_directory=vector_dir)
+        #vectorstore = Chroma.from_documents(documents, embedding_model, persist_directory=vector_dir)
+        vectorstore=None
     return vectorstore
 
 # 3. Create contract retriever
 def create_contract_retriever():
-    
-    folder_path = "D:\\ai-ml-data\\pdf-input"
-    f = open('..\\api_key.txt')
+    basedir = os.getcwd();
+    path = os.path.join(basedir, "pdf-input")
+    print("Path: ", path)
+    folder_path = path
+    f = open('api_key.txt')
     api_key = f.read()
     os.environ['OPENAI_API_KEY'] = api_key
     #openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -122,7 +125,9 @@ def create_contract_retriever():
     
     print("Creating vectorstore...")
     vectorstore = create_vectorstore(split_documents)
-    retriever = vectorstore.as_retriever()
+    retriever = None
+    if ( vectorstore != None ):
+        retriever = vectorstore.as_retriever()
     return retriever
 
     
@@ -135,7 +140,7 @@ def create_qa_chain(vectorstore):
 
 # 5. Main function
 def chat_with_pdfs(folder_path):
-    f = open('..\\api_key.txt')
+    f = open('api_key.txt')
     api_key = f.read()
     os.environ['OPENAI_API_KEY'] = api_key
     #openai.api_key = os.getenv('OPENAI_API_KEY')

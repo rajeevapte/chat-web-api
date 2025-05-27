@@ -10,7 +10,7 @@ from langchain_openai import ChatOpenAI
 
 
 
-f = open('..\\api_key.txt')
+f = open('api_key.txt')
 api_key = f.read()
 os.environ['OPENAI_API_KEY'] = api_key
 

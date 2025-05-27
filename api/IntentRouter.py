@@ -10,10 +10,18 @@ from langchain.chains import LLMChain
 from langchain.chains import RetrievalQA
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts import PromptTemplate
+import PropertiesHelper
 import pandas as pd
 
 def processQuestion(question):
-    f = open('..\\api_key.txt')
+    config = PropertiesHelper.read_properties_file()
+    ip_csv_files = config['DEFAULT']['ip_csv_files']
+    ip_pdf_files = config['DEFAULT']['ip_pdf_files']
+    op_vector_store = config['DEFAULT']['op_vector_store']
+
+    path = os.path.join("folder", "subfolder", "file.txt")
+    print("Path: ", ip_csv_files)
+    f = open('api_key.txt')
     api_key = f.read()
     os.environ['OPENAI_API_KEY'] = api_key
 
@@ -23,7 +31,7 @@ def processQuestion(question):
     contract_retriever = create_contract_retriever()
 
 
-    csv_folder_path = "D:\\ai-ml-data\\csv-input"
+    csv_folder_path = "csv-input"
 
     csv_agent = create_csv_retriever_agent(csv_folder_path);
 
