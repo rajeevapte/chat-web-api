@@ -14,13 +14,22 @@ from langchain.chains import RetrievalQA
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts import PromptTemplate
 import pandas as pd
+import PropertiesHelper
 
 
 
 def processQuestion(question):
-    csv_folder_path = "D:\\ai-ml-data\\csv-input"
+    
+
+    config = PropertiesHelper.read_properties_file()
+    ip_csv_files = config['DEFAULT']['ip_csv_files']
+    ip_pdf_files = config['DEFAULT']['ip_pdf_files']
+    op_vector_store = config['DEFAULT']['op_vector_store']
+
+    csv_folder_path = ip_csv_files
+
        
-    f = open('..\\api_key.txt')
+    f = open('api_key.txt')
     api_key = f.read()
     os.environ['OPENAI_API_KEY'] = api_key
 
